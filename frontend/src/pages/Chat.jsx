@@ -9,8 +9,10 @@ const LANGS_CHAT = [
 ];
 
 const VEDA_AVATAR = ({ size = "md" }) => (
-  <div className={`rounded-full bg-gradient-to-br from-green-400 to-emerald-700 flex items-center justify-center flex-shrink-0 ${size === "lg" ? "w-12 h-12 text-2xl" : "w-8 h-8 text-base"}`}>
-    <img src="src\images\image.png" className="rounded-2xl" alt="" />
+  <div className={`relative rounded-full bg-gradient-to-br from-violet-600 via-purple-600 to-indigo-700 flex items-center justify-center flex-shrink-0 ${size === "lg" ? "w-14 h-14 text-3xl" : "w-10 h-10 text-lg"} shadow-2xl shadow-purple-500/30`}>
+    <div className="absolute inset-0 rounded-full bg-gradient-to-br from-white/20 to-transparent opacity-30"></div>
+    <img src="src\images\image.png" className="rounded-2xl w-full h-full object-cover border-2 border-white/30" alt="" />
+    <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-green-400 rounded-full animate-pulse shadow-lg"></div>
   </div>
 );
 
@@ -27,6 +29,7 @@ export default function Chat() {
   const bottomRef = useRef(null);
   const fileRef = useRef();
   const recogRef = useRef(null);
+  const [isTyping, setIsTyping] = useState(false);
 
   // Set initial greeting based on language
   useEffect(() => {
@@ -439,48 +442,57 @@ export default function Chat() {
   ];
 
   return (
-    <div className="h-screen bg-gradient-to-br from-slate-900 via-emerald-950 to-slate-900 flex flex-col" style={{ fontFamily: "'Inter', 'Sora', sans-serif" }}>
+    <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-violet-900 flex flex-col" style={{ fontFamily: "'Inter', 'Sora', sans-serif" }}>
+      {/* Animated background elements */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
+        <div className="absolute -bottom-40 -left-40 w-60 h-60 bg-violet-600 rounded-full mix-blend-multiply filter blur-2xl opacity-10 animate-pulse" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute top-20 -left-20 w-32 h-32 bg-indigo-600 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-pulse" style={{ animationDelay: '4s' }}></div>
+      </div>
+      
       <Navbar />
 
       {/* Chat container */}
-      <div className="flex-1 flex flex-col max-w-4xl w-full mx-auto pt-24 pb-0 px-6 overflow-hidden">
+      <div className="flex-1 flex flex-col max-w-6xl w-full mx-auto pt-28 pb-0 px-6 overflow-hidden">
         {/* Chat header card */}
-        <div className="rounded-t-3xl bg-white/10 backdrop-blur-xl border border-white/10 border-b-0 px-6 py-6 flex items-center justify-between mt-6 shadow-2xl">
-          <div className="flex items-center gap-4">
+        <div className="rounded-t-3xl bg-white/5 backdrop-blur-2xl border border-white/10 border-b-0 px-8 py-8 flex items-center justify-between mt-8 shadow-2xl">
+          <div className="flex items-center gap-6">
             <VEDA_AVATAR size="lg" />
             <div>
-              <h2 className="text-white font-bold text-xl tracking-tight">VEDA</h2>
-              <p className="text-emerald-400 text-sm flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 inline-block animate-pulse shadow-lg shadow-emerald-400/50" />
+              <h2 className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-purple-600 bg-gradient-to-r text-3xl font-black tracking-tight">VEDA</h2>
+              <p className="text-violet-300 text-sm flex items-center gap-3 font-medium">
+                <span className="w-3 h-3 rounded-full bg-gradient-to-r from-green-400 to-emerald-500 animate-pulse shadow-lg shadow-green-400/50"></span>
                 {t("chat_online")}
               </p>
             </div>
           </div>
 
           {/* TTS toggle and Lang switcher */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-4">
             <button
               onClick={() => setTtsEnabled(!ttsEnabled)}
-              className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-300 ${
+              className={`group relative px-6 py-3 rounded-2xl text-sm font-bold transition-all duration-500 transform hover:scale-105 ${
                 ttsEnabled
-                  ? "bg-emerald-600 text-white shadow-lg shadow-emerald-600/30 hover:bg-emerald-700"
-                  : "bg-white/10 text-emerald-300 hover:bg-white/20 border border-white/20 hover:border-white/30"
+                  ? "bg-gradient-to-r from-violet-600 to-purple-600 text-white shadow-2xl shadow-violet-500/30 hover:shadow-3xl hover:shadow-violet-600/40"
+                  : "bg-white/10 backdrop-blur-sm border border-white/20 text-violet-600 hover:bg-white/20 hover:border-violet-500/40 hover:text-violet-700"
               }`}
               title={ttsEnabled ? "Disable text-to-speech" : "Enable text-to-speech"}
             >
-              <span className="text-lg">{ttsEnabled ? "🔊" : "🔇"}</span>
+              <span className="relative z-10 text-2xl transition-transform duration-300 group-hover:rotate-12">{ttsEnabled ? "🔊" : "🔇"}</span>
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-violet-600/20 to-purple-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl"></div>
             </button>
             {LANGS_CHAT.map((l) => (
               <button
                 key={l.code}
                 onClick={() => setLang(l.code)}
-                className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-300 ${
+                className={`group relative px-6 py-3 rounded-2xl text-sm font-bold transition-all duration-500 transform hover:scale-105 ${
                   lang === l.code
-                    ? "bg-emerald-600 text-white shadow-lg shadow-emerald-600/30 hover:bg-emerald-700"
-                    : "bg-white/10 text-emerald-300 hover:bg-white/20 border border-white/20 hover:border-white/30"
+                    ? "bg-gradient-to-r from-violet-600 to-purple-600 text-white shadow-2xl shadow-violet-500/30 hover:shadow-3xl hover:shadow-violet-600/40"
+                    : "bg-white/10 backdrop-blur-sm border border-white/20 text-violet-600 hover:bg-white/20 hover:border-violet-500/40 hover:text-violet-700"
                 }`}
               >
-                {l.label}
+                <span className="relative z-10 transition-transform duration-300 group-hover:scale-110">{l.label}</span>
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-violet-600/20 to-purple-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl"></div>
               </button>
             ))}
           </div>
@@ -489,19 +501,20 @@ export default function Chat() {
         {/* Messages */}
         <div className="flex-1 overflow-y-auto bg-white/5 backdrop-blur-sm border-x border-white/10 px-6 py-6 space-y-6">
           {messages.map((msg, i) => (
-            <div key={i} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"} gap-3 items-end`}>
+            <div key={i} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"} gap-3 items-end mb-4`}>
               {msg.role === "veda" && <VEDA_AVATAR />}
               <div className={`max-w-[85%] ${msg.role === "user" ? "items-end" : "items-start"} flex flex-col gap-2`}>
                 {msg.image && (
-                  <img src={msg.image} alt="uploaded" className="rounded-2xl max-h-48 object-cover border border-white/20 shadow-lg" />
+                  <img src={msg.image} alt="uploaded" className="rounded-2xl max-h-48 object-cover border border-white/20 shadow-xl" />
                 )}
                 <div
-                  className={`px-6 py-4 rounded-2xl text-sm leading-relaxed whitespace-pre-wrap transition-all duration-300 ${
+                  className={`relative px-6 py-4 rounded-2xl text-sm leading-relaxed whitespace-pre-wrap transition-all duration-500 transform hover:scale-105 ${
                     msg.role === "user"
-                      ? "bg-emerald-600 text-white rounded-br-2xl shadow-lg shadow-emerald-600/20"
-                      : "bg-white/90 text-slate-800 rounded-bl-2xl border border-white/20 shadow-xl backdrop-blur-sm"
+                      ? "bg-gradient-to-br from-emerald-600 to-green-700 text-white rounded-br-2xl shadow-lg shadow-emerald-600/20"
+                      : "bg-white/90 text-slate-800 rounded-bl-2xl border border-white/20 shadow-xl backdrop-blur-sm hover:shadow-2xl hover:shadow-violet-500/10"
                   }`}
                 >
+                  <div className="absolute top-0 right-0 w-3 h-3 bg-gradient-to-br from-violet-500 to-purple-600 rounded-full animate-pulse shadow-lg"></div>
                   {msg.text}
                 </div>
               </div>
@@ -509,12 +522,12 @@ export default function Chat() {
           ))}
 
           {loading && (
-            <div className="flex justify-start gap-3 items-end">
+            <div className="flex justify-start gap-3 items-end mb-4">
               <VEDA_AVATAR />
               <div className="bg-white/90 rounded-2xl rounded-bl-2xl border border-white/20 shadow-xl backdrop-blur-sm px-6 py-4">
                 <div className="flex gap-2">
                   {[0, 1, 2].map((i) => (
-                    <span key={i} className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-bounce shadow-lg shadow-emerald-500/30" style={{ animationDelay: `${i * 0.15}s` }} />
+                    <div key={i} className="w-3 h-3 rounded-full bg-gradient-to-br from-violet-500 to-purple-600 animate-bounce shadow-lg" style={{ animationDelay: `${i * 0.15}s` }}></div>
                   ))}
                 </div>
               </div>
@@ -524,66 +537,95 @@ export default function Chat() {
         </div>
 
         {/* Quick chips */}
-        <div className="bg-white/5 backdrop-blur-sm border-x border-white/10 px-6 pt-4 pb-3 flex gap-3 overflow-x-auto">
-          {chips.map((c) => (
+        <div className="bg-white/5 backdrop-blur-sm border-x border-white/10 px-6 pt-4 pb-6 flex gap-3 overflow-x-auto">
+          {chips.map((c, index) => (
             <button
               key={c.label}
               onClick={() => sendMessage(c.label)}
-              className="whitespace-nowrap text-sm px-4 py-2.5 rounded-xl border border-white/20 bg-white/10 text-emerald-600 hover:bg-emerald-600 hover:text-white transition-all duration-300 hover:shadow-lg hover:shadow-emerald-600/20 flex items-center gap-2 flex-shrink-0"
+              className="group relative whitespace-nowrap text-sm px-5 py-3 rounded-2xl border border-white/20 bg-white/10 text-violet-600 hover:bg-gradient-to-br hover:from-violet-500 hover:to-purple-600 hover:text-white transition-all duration-500 transform hover:scale-105 hover:shadow-2xl hover:shadow-violet-500/20 flex items-center gap-3 flex-shrink-0"
+              style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <span className="text-lg">{c.emoji}</span>
-              <span className="font-medium">{c.label}</span>
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-violet-500/20 to-purple-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl"></div>
+              <span className="relative z-10 text-lg transition-transform duration-300 group-hover:scale-110">{c.emoji}</span>
+              <span className="relative z-10 font-semibold transition-colors duration-300 group-hover:text-white">{c.label}</span>
             </button>
           ))}
         </div>
 
         {/* Upload image strip */}
-        <div className="bg-white/5 backdrop-blur-sm border-x border-white/10 px-6 pb-4">
+        <div className="bg-white/5 backdrop-blur-sm border-x border-white/10 px-6 pb-6">
           <button
             onClick={() => fileRef.current.click()}
-            className="w-full flex items-center justify-center gap-3 py-3.5 rounded-xl border border-dashed border-white/30 bg-white/10 text-emerald-600 hover:bg-emerald-600 hover:text-white transition-all duration-300 hover:shadow-lg hover:shadow-emerald-600/20"
+            className="group relative w-full flex items-center justify-center gap-4 py-4 rounded-2xl border-2 border-dashed border-white/30 bg-white/10 text-violet-600 hover:bg-gradient-to-br hover:from-violet-500 hover:to-purple-600 hover:text-white transition-all duration-500 transform hover:scale-105 hover:shadow-2xl hover:shadow-violet-500/20"
           >
-            <span className="text-2xl mb-1">🌿</span>
-            <span className="font-medium">{t("chat_upload")}</span>
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-violet-500/20 to-purple-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl"></div>
+            <div className="relative z-10 flex items-center gap-3">
+              <div className="text-4xl mb-2 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12">🌿</div>
+              <span className="font-semibold text-lg transition-colors duration-300 group-hover:text-white">{t("chat_upload")}</span>
+            </div>
           </button>
-          <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={handleImageUpload} />
-        </div>
+        ))}
+      </div>
 
-        {/* Input bar */}
-        <div className="rounded-b-3xl bg-white/10 backdrop-blur-xl border border-white/10 border-t-0 px-6 py-6 flex gap-3 items-center shadow-2xl">
-          <button
-            onClick={toggleVoice}
-            className={`w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
-              listening
-                ? "bg-red-600 text-white shadow-lg shadow-red-600/30 animate-pulse"
-                : "bg-white/10 border border-white/20 text-emerald-500 hover:bg-emerald-600 hover:text-white"
-            }`}
-            title={listening ? "Stop recording" : "Voice input (Click to speak)"}
-          >
-            <span className="text-xl">{listening ? "🔴" : "🎤"}</span>
-          </button>
-
-          <div className="flex-1 relative">
-            <input
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && sendMessage()}
-              placeholder={listening ? t("voice_listening") : t("chat_placeholder")}
-              className="w-full bg-white/20 backdrop-blur-sm border border-white/20 rounded-xl px-5 py-3.5 text-sm text-white placeholder-white/50 outline-none focus:border-emerald-500 focus:bg-white/30 focus:ring-2 focus:ring-emerald-500/20 transition-all duration-300"
-            />
-            
-            <button
-              onClick={() => sendMessage()}
-              disabled={!input.trim() || loading}
-              className="absolute right-2 top-1/2 w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-700 flex items-center justify-center text-white flex-shrink-0 hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:scale-100 shadow-lg shadow-emerald-600/30 disabled:hover:scale-100"
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9 2-9 2-9-2-9-2-9-2zm0 0l-7 7-7 7-7 7 7 7 7-7-7z" />
-              </svg>
-            </button>
+      {/* Upload image strip */}
+      <div className="bg-white/5 backdrop-blur-sm border-x border-white/10 px-6 pb-6">
+        <button
+          onClick={() => fileRef.current.click()}
+          className="group relative w-full flex items-center justify-center gap-4 py-4 rounded-2xl border-2 border-dashed border-white/30 bg-white/10 text-violet-600 hover:bg-gradient-to-br hover:from-violet-500 hover:to-purple-600 hover:text-white transition-all duration-500 transform hover:scale-105 hover:shadow-2xl hover:shadow-violet-500/20"
+        >
+          <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-violet-500/20 to-purple-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl"></div>
+          <div className="relative z-10 flex items-center gap-3">
+            <div className="text-4xl mb-2 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12">🌿</div>
+            <span className="font-semibold text-lg transition-colors duration-300 group-hover:text-white">{t("chat_upload")}</span>
           </div>
+        </button>
+        <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={handleImageUpload} />
+      </div>
+
+      {/* Input bar */}
+      <div className="rounded-b-3xl bg-white/10 backdrop-blur-xl border border-white/10 border-t-0 px-6 py-6 flex gap-4 items-center shadow-2xl">
+        <button
+          onClick={toggleVoice}
+          className={`group relative w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0 transition-all duration-500 transform hover:scale-105 ${
+            listening
+              ? "bg-gradient-to-br from-red-600 to-red-700 text-white shadow-2xl shadow-red-600/30 animate-pulse"
+              : "bg-white/10 border border-white/20 text-violet-600 hover:bg-gradient-to-br hover:from-violet-500 hover:to-purple-600 hover:text-white"
+          }`}
+          title={listening ? "Stop recording" : "Voice input (Click to speak)"}
+        >
+          <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-violet-500/20 to-purple-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl"></div>
+          <span className="relative z-10 text-2xl transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12">{listening ? "🔴" : "🎤"}</span>
+        </button>
+
+        <div className="flex-1 relative">
+          <input
+            value={input}
+            onChange={(e) => {
+              setInput(e.target.value);
+              setIsTyping(e.target.value.length > 0);
+            }}
+            onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && sendMessage()}
+            onFocus={() => setIsTyping(true)}
+            onBlur={() => setIsTyping(false)}
+            placeholder={listening ? t("voice_listening") : t("chat_placeholder")}
+            className="w-full bg-white/20 backdrop-blur-sm border border-white/20 rounded-2xl px-6 py-4 text-sm text-white placeholder-white/50 outline-none focus:border-violet-500 focus:bg-white/30 focus:ring-2 focus:ring-violet-500/20 transition-all duration-500"
+          />
+
+          <button
+            onClick={() => sendMessage()}
+            disabled={!input.trim() || loading}
+            className={`absolute right-3 top-1/2 w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-500 to-violet-600 flex items-center justify-center text-white flex-shrink-0 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl hover:shadow-violet-500/20 disabled:opacity-50 disabled:scale-100 disabled:hover:scale-100 ${
+              isTyping ? 'ring-2 ring-violet-500 ring-offset-2' : ''
+            }`}
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5v14l-3.86-3.86a2 2 0 012-2 012-2s0 2 2v14a2 2 0 01-2 01-2 012-2s0 2 2l-2.59 2.59-6.41 0 01-2 01-2 012-2s0 2 2l7 7 7 7 7 7z" />
+            </svg>
+          </button>
         </div>
       </div>
     </div>
+  </div>
+);
   );
 }
