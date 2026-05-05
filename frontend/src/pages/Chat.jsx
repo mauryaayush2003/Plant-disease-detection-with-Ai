@@ -439,45 +439,45 @@ export default function Chat() {
   ];
 
   return (
-    <div className="h-screen bg-[#060f06] flex flex-col" style={{ fontFamily: "'Sora', sans-serif" }}>
+    <div className="h-screen bg-gradient-to-br from-slate-900 via-emerald-950 to-slate-900 flex flex-col" style={{ fontFamily: "'Inter', 'Sora', sans-serif" }}>
       <Navbar />
 
       {/* Chat container */}
-      <div className="flex-1 flex flex-col max-w-2xl w-full mx-auto pt-20 pb-0 px-4 overflow-hidden">
+      <div className="flex-1 flex flex-col max-w-4xl w-full mx-auto pt-24 pb-0 px-6 overflow-hidden">
         {/* Chat header card */}
-        <div className="rounded-t-3xl bg-gradient-to-r from-[#0f2e10] to-[#0d250e] border border-green-800/40 border-b-0 px-5 py-4 flex items-center justify-between mt-4">
-          <div className="flex items-center gap-3">
+        <div className="rounded-t-3xl bg-white/10 backdrop-blur-xl border border-white/10 border-b-0 px-6 py-6 flex items-center justify-between mt-6 shadow-2xl">
+          <div className="flex items-center gap-4">
             <VEDA_AVATAR size="lg" />
             <div>
-              <h2 className="text-white font-black text-base tracking-tight">VEDA</h2>
-              <p className="text-green-400 text-xs flex items-center gap-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-green-400 inline-block animate-pulse" />
+              <h2 className="text-white font-bold text-xl tracking-tight">VEDA</h2>
+              <p className="text-emerald-400 text-sm flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 inline-block animate-pulse shadow-lg shadow-emerald-400/50" />
                 {t("chat_online")}
               </p>
             </div>
           </div>
 
           {/* TTS toggle and Lang switcher */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
             <button
               onClick={() => setTtsEnabled(!ttsEnabled)}
-              className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all ${
+              className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-300 ${
                 ttsEnabled
-                  ? "bg-blue-600 text-white shadow-lg shadow-blue-900/50"
-                  : "bg-gray-700/30 text-gray-500 hover:bg-gray-600/40 border border-gray-700/40"
+                  ? "bg-emerald-600 text-white shadow-lg shadow-emerald-600/30 hover:bg-emerald-700"
+                  : "bg-white/10 text-emerald-300 hover:bg-white/20 border border-white/20 hover:border-white/30"
               }`}
               title={ttsEnabled ? "Disable text-to-speech" : "Enable text-to-speech"}
             >
-              🔊
+              <span className="text-lg">{ttsEnabled ? "🔊" : "🔇"}</span>
             </button>
             {LANGS_CHAT.map((l) => (
               <button
                 key={l.code}
                 onClick={() => setLang(l.code)}
-                className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all ${
+                className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-300 ${
                   lang === l.code
-                    ? "bg-green-600 text-white shadow-lg shadow-green-900/50"
-                    : "bg-green-900/30 text-green-500 hover:bg-green-800/40 border border-green-800/40"
+                    ? "bg-emerald-600 text-white shadow-lg shadow-emerald-600/30 hover:bg-emerald-700"
+                    : "bg-white/10 text-emerald-300 hover:bg-white/20 border border-white/20 hover:border-white/30"
                 }`}
               >
                 {l.label}
@@ -487,19 +487,19 @@ export default function Chat() {
         </div>
 
         {/* Messages */}
-        <div className="flex-1 overflow-y-auto bg-[#080f08] border-x border-green-900/30 px-4 py-4 space-y-4">
+        <div className="flex-1 overflow-y-auto bg-white/5 backdrop-blur-sm border-x border-white/10 px-6 py-6 space-y-6">
           {messages.map((msg, i) => (
-            <div key={i} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"} gap-2 items-end`}>
+            <div key={i} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"} gap-3 items-end`}>
               {msg.role === "veda" && <VEDA_AVATAR />}
-              <div className={`max-w-[78%] ${msg.role === "user" ? "items-end" : "items-start"} flex flex-col gap-1`}>
+              <div className={`max-w-[85%] ${msg.role === "user" ? "items-end" : "items-start"} flex flex-col gap-2`}>
                 {msg.image && (
-                  <img src={msg.image} alt="uploaded" className="rounded-xl max-h-40 object-cover border border-green-800/30" />
+                  <img src={msg.image} alt="uploaded" className="rounded-2xl max-h-48 object-cover border border-white/20 shadow-lg" />
                 )}
                 <div
-                  className={`px-4 py-3 rounded-2xl text-sm leading-relaxed whitespace-pre-wrap ${
+                  className={`px-6 py-4 rounded-2xl text-sm leading-relaxed whitespace-pre-wrap transition-all duration-300 ${
                     msg.role === "user"
-                      ? "bg-green-700 text-white rounded-br-sm"
-                      : "bg-[#0f1f0f] text-gray-200 rounded-bl-sm border border-green-900/30"
+                      ? "bg-emerald-600 text-white rounded-br-2xl shadow-lg shadow-emerald-600/20"
+                      : "bg-white/90 text-slate-800 rounded-bl-2xl border border-white/20 shadow-xl backdrop-blur-sm"
                   }`}
                 >
                   {msg.text}
@@ -509,12 +509,12 @@ export default function Chat() {
           ))}
 
           {loading && (
-            <div className="flex justify-start gap-2 items-end">
+            <div className="flex justify-start gap-3 items-end">
               <VEDA_AVATAR />
-              <div className="bg-[#0f1f0f] border border-green-900/30 px-4 py-3 rounded-2xl rounded-bl-sm">
-                <div className="flex gap-1">
+              <div className="bg-white/90 rounded-2xl rounded-bl-2xl border border-white/20 shadow-xl backdrop-blur-sm px-6 py-4">
+                <div className="flex gap-2">
                   {[0, 1, 2].map((i) => (
-                    <span key={i} className="w-2 h-2 rounded-full bg-green-500 animate-bounce" style={{ animationDelay: `${i * 0.15}s` }} />
+                    <span key={i} className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-bounce shadow-lg shadow-emerald-500/30" style={{ animationDelay: `${i * 0.15}s` }} />
                   ))}
                 </div>
               </div>
@@ -524,58 +524,64 @@ export default function Chat() {
         </div>
 
         {/* Quick chips */}
-        <div className="bg-[#080f08] border-x border-green-900/30 px-4 pt-3 pb-2 flex gap-2 overflow-x-auto">
+        <div className="bg-white/5 backdrop-blur-sm border-x border-white/10 px-6 pt-4 pb-3 flex gap-3 overflow-x-auto">
           {chips.map((c) => (
             <button
               key={c.label}
               onClick={() => sendMessage(c.label)}
-              className="whitespace-nowrap text-xs px-3 py-1.5 rounded-full border border-green-700/40 text-green-300 bg-green-900/20 hover:bg-green-800/40 transition flex items-center gap-1.5 flex-shrink-0"
+              className="whitespace-nowrap text-sm px-4 py-2.5 rounded-xl border border-white/20 bg-white/10 text-emerald-600 hover:bg-emerald-600 hover:text-white transition-all duration-300 hover:shadow-lg hover:shadow-emerald-600/20 flex items-center gap-2 flex-shrink-0"
             >
-              {c.emoji} {c.label}
+              <span className="text-lg">{c.emoji}</span>
+              <span className="font-medium">{c.label}</span>
             </button>
           ))}
         </div>
 
         {/* Upload image strip */}
-        <div className="bg-[#080f08] border-x border-green-900/30 px-4 pb-3">
+        <div className="bg-white/5 backdrop-blur-sm border-x border-white/10 px-6 pb-4">
           <button
             onClick={() => fileRef.current.click()}
-            className="w-full flex items-center justify-center gap-2 py-2 rounded-xl border border-dashed border-green-800/50 text-green-600 text-xs hover:border-green-600/60 hover:text-green-400 hover:bg-green-900/10 transition"
+            className="w-full flex items-center justify-center gap-3 py-3.5 rounded-xl border border-dashed border-white/30 bg-white/10 text-emerald-600 hover:bg-emerald-600 hover:text-white transition-all duration-300 hover:shadow-lg hover:shadow-emerald-600/20"
           >
-            🌿 {t("chat_upload")}
+            <span className="text-2xl mb-1">🌿</span>
+            <span className="font-medium">{t("chat_upload")}</span>
           </button>
           <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={handleImageUpload} />
         </div>
 
         {/* Input bar */}
-        <div className="rounded-b-3xl bg-[#0a1a0a] border border-green-900/30 border-t-0 px-4 py-4 flex gap-3 items-center">
+        <div className="rounded-b-3xl bg-white/10 backdrop-blur-xl border border-white/10 border-t-0 px-6 py-6 flex gap-3 items-center shadow-2xl">
           <button
             onClick={toggleVoice}
-            className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 transition-all ${
+            className={`w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
               listening
-                ? "bg-red-600 animate-pulse shadow-lg shadow-red-900/50"
-                : "bg-green-900/40 border border-green-800/50 text-green-500 hover:bg-green-800/50"
+                ? "bg-red-600 text-white shadow-lg shadow-red-600/30 animate-pulse"
+                : "bg-white/10 border border-white/20 text-emerald-500 hover:bg-emerald-600 hover:text-white"
             }`}
             title={listening ? "Stop recording" : "Voice input (Click to speak)"}
           >
-            {listening ? "🔴" : "🎤"}
+            <span className="text-xl">{listening ? "🔴" : "🎤"}</span>
           </button>
 
-          <input
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && sendMessage()}
-            placeholder={listening ? t("voice_listening") : t("chat_placeholder")}
-            className="flex-1 bg-[#0f1f0f] border border-green-900/40 rounded-full px-5 py-2.5 text-sm text-white placeholder-green-900 outline-none focus:border-green-600/60 transition"
-          />
-
-          <button
-            onClick={() => sendMessage()}
-            disabled={!input.trim() || loading}
-            className="w-10 h-10 rounded-full bg-gradient-to-br from-green-500 to-emerald-700 flex items-center justify-center text-white flex-shrink-0 hover:scale-110 transition-all disabled:opacity-40 disabled:scale-100 shadow-lg shadow-green-900/50"
-          >
-            ➤
-          </button>
+          <div className="flex-1 relative">
+            <input
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && sendMessage()}
+              placeholder={listening ? t("voice_listening") : t("chat_placeholder")}
+              className="w-full bg-white/20 backdrop-blur-sm border border-white/20 rounded-xl px-5 py-3.5 text-sm text-white placeholder-white/50 outline-none focus:border-emerald-500 focus:bg-white/30 focus:ring-2 focus:ring-emerald-500/20 transition-all duration-300"
+            />
+            
+            <button
+              onClick={() => sendMessage()}
+              disabled={!input.trim() || loading}
+              className="absolute right-2 top-1/2 w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-700 flex items-center justify-center text-white flex-shrink-0 hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:scale-100 shadow-lg shadow-emerald-600/30 disabled:hover:scale-100"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9 2-9 2-9-2-9-2-9-2zm0 0l-7 7-7 7-7 7 7 7 7-7-7z" />
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
     </div>
