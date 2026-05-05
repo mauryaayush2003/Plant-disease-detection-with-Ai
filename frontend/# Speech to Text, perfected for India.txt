@@ -1,0 +1,137 @@
+# Speech to Text, perfected for India
+
+Trust every transcript, even with background noise, multiple accents, or mid-sentence language switches.
+[Get Started for Free](https://dashboard.sarvam.ai)
+[Contact Us](https://www.sarvam.ai/contact-us)
+
+### Transcribe
+With formatting and number normalization.
+
+### Translate
+From Indic languages to English.
+
+### Transliteration
+Indian languages written in English letters.
+
+### Verbatim
+Preserves fillers and spoken numbers.
+
+## Every word, captured accurately
+
+Code-mixing. Numbers. Proper nouns. Abbreviations.
+
+### Seamless code-mixing
+Understands when speakers switch between Hindi, English, and regional languages mid-sentence.
+00:00
+
+### Telephony-optimized
+Handles real call center audio: 8kHz, background noise, multiple speakers.
+00:00
+
+### Handle noisy audio
+Background noise, cross-talk, poor connections. Our models maintain accuracy even in challenging acoustic conditions.
+00:00
+
+## Powering real-world voice solutions
+
+From call centers to accessibility tools. Real use cases, already in production.
+
+### Voice agents
+
+Real-time transcription for live voice agents and customer interactions.
+Customer support
+Sales & lead qualification
+Edtech tutors
+Social & companion bots
+0:00
+Voice agents
+
+### 22 Indian languages with automatic detection
+Comprehensive coverage across all major Indian languages with seamless code-mixing support.
+
+### Streaming & batch APIs
+Real-time for voice agents, batch for analytics.
+
+### Speaker diarization
+Differentiate speakers in conversations.
+
+### Domain prompting
+Boost accuracy for specialized vocabulary.
+
+### Plug & play integrations
+LiveKit / Pipecat: deploy a voice agent in under 10 minutes.
+<250ms
+Median latency
+100M+
+Mins transcribed
+>99.5%
+Uptime
+
+## 22 Indian languages, every script natively transcribed
+
+Accurate transcription across all scheduled languages with code-mixing support. [See voice-to-text use cases](https://www.sarvam.ai/voice-to-text)
+[हिन्दीHindi · hi-IN](https://www.sarvam.ai/apis/speech-to-text/hindi)
+[বাংলাBengali · bn-IN](https://www.sarvam.ai/apis/speech-to-text/bengali)
+[தமிழ்Tamil · ta-IN](https://www.sarvam.ai/apis/speech-to-text/tamil)
+[తెలుగుTelugu · te-IN](https://www.sarvam.ai/apis/speech-to-text/telugu)
+[मराठीMarathi · mr-IN](https://www.sarvam.ai/apis/speech-to-text/marathi)
+[ગુજરાતીGujarati · gu-IN](https://www.sarvam.ai/apis/speech-to-text/gujarati)
+[ಕನ್ನಡKannada · kn-IN](https://www.sarvam.ai/apis/speech-to-text/kannada)
+[മലയാളംMalayalam · ml-IN](https://www.sarvam.ai/apis/speech-to-text/malayalam)
+[नेपालीNepali · ne-IN](https://www.sarvam.ai/apis/speech-to-text/nepali)
+[ਪੰਜਾਬੀPunjabi · pa-IN](https://www.sarvam.ai/apis/speech-to-text/punjabi)
+[ଓଡ଼ିଆOdia · or-IN](https://www.sarvam.ai/apis/speech-to-text/odia)
+[कोंकणीKonkani · kok-IN](https://www.sarvam.ai/apis/speech-to-text/konkani)
+[मैथिलीMaithili · mai-IN](https://www.sarvam.ai/apis/speech-to-text/maithili)
+[سنڌيSindhi · sd-IN](https://www.sarvam.ai/apis/speech-to-text/sindhi)
+[ᱥᱟᱱᱛᱟᱲᱤSantali · sat-IN](https://www.sarvam.ai/apis/speech-to-text/santali)
+
+### Does it support speaker diarization?
+Start transcribing in minutes
+Start transcribing in minutes
+[Get Started](https://dashboard.sarvam.ai)
+AI for India starts here
+
+### Products
+- [Sarvam Samvaad](https://www.sarvam.ai/products/conversational-agents)
+- [Sarvam Studio](https://www.sarvam.ai/products/studio)
+- [Sarvam Akshar](https://www.sarvam.ai/products/akshar)
+[Sarvam Samvaad](https://www.sarvam.ai/products/conversational-agents)
+[Sarvam Studio](https://www.sarvam.ai/products/studio)
+[Sarvam Akshar](https://www.sarvam.ai/products/akshar)
+
+### API
+- [Text to Speech](https://www.sarvam.ai/apis/text-to-speech)
+- [Speech to Text](https://www.sarvam.ai/apis/speech-to-text)
+- [Document Digitisation](https://www.sarvam.ai/apis/document-digitisation)
+- [Translation](https://www.sarvam.ai/apis/translation)
+- [API Pricing](https://www.sarvam.ai/api-pricing)
+[Text to Speech](https://www.sarvam.ai/apis/text-to-speech)
+[Speech to Text](https://www.sarvam.ai/apis/speech-to-text)
+[Document Digitisation](https://www.sarvam.ai/apis/document-digitisation)
+[Translation](https://www.sarvam.ai/apis/translation)
+[API Pricing](https://www.sarvam.ai/api-pricing)
+
+### Company
+- [About Us](https://www.sarvam.ai/about-us)
+- [Contact Us](https://www.sarvam.ai/contact-us)
+- [Blogs](https://www.sarvam.ai/blogs)
+- [Discord](https://discord.com/invite/5rAsykttcs)
+- [Careers](https://www.sarvam.ai/careers)
+- [Terms of Service](https://www.sarvam.ai/terms-of-use)
+- [Privacy Policy](https://www.sarvam.ai/privacy-policy)
+[About Us](https://www.sarvam.ai/about-us)
+[Contact Us](https://www.sarvam.ai/contact-us)
+[Blogs](https://www.sarvam.ai/blogs)
+[Discord](https://discord.com/invite/5rAsykttcs)
+[Careers](https://www.sarvam.ai/careers)
+[Terms of Service](https://www.sarvam.ai/terms-of-use)
+[Privacy Policy](https://www.sarvam.ai/privacy-policy)
+
+### Socials
+- [LinkedIn](https://www.linkedin.com/company/sarvam-ai)
+- [X](https://x.com/SarvamAI)
+- [YouTube](https://youtube.com/@sarvamai)
+[LinkedIn](https://www.linkedin.com/company/sarvam-ai)
+[X](https://x.com/SarvamAI)
+[YouTube](https://youtube.com/@sarvamai)
